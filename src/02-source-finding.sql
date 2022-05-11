@@ -132,7 +132,7 @@ CREATE TABLE wallaby.comment (
 ALTER TABLE wallaby.comment ADD COLUMN "comment" text NOT NULL;
 ALTER TABLE wallaby.comment ADD COLUMN "author" text NOT NULL;
 ALTER TABLE wallaby.comment ADD COLUMN "detection_id" bigint NOT NULL;
-ALTER TABLE wallaby.comment ADD COLUMN "updated_at" timestamp without time zone;
+ALTER TABLE wallaby.comment ADD COLUMN "updated_at" timestamp without time zone  NOT NULL;
 ALTER TABLE wallaby.comment ADD FOREIGN KEY ("detection_id") REFERENCES wallaby.detection ("id") ON UPDATE CASCADE ON DELETE CASCADE;
 
 
@@ -141,7 +141,7 @@ CREATE TABLE wallaby.tag (
 );
 ALTER TABLE wallaby.tag ADD COLUMN "name" varchar NOT NULL UNIQUE;
 ALTER TABLE wallaby.tag ADD COLUMN "description" text;
-ALTER TABLE wallaby.tag ADD COLUMN "added_at" timestamp without time zone;
+ALTER TABLE wallaby.tag ADD COLUMN "added_at" timestamp without time zone NOT NULL;
 ALTER TABLE wallaby.tag ALTER COLUMN added_at SET DEFAULT now();
 
 
@@ -151,7 +151,7 @@ CREATE TABLE wallaby.tag_detection (
 ALTER TABLE wallaby.tag_detection ADD COLUMN "tag_id" bigint NOT NULL;
 ALTER TABLE wallaby.tag_detection ADD COLUMN "detection_id" bigint NOT NULL;
 ALTER TABLE wallaby.tag_detection ADD COLUMN "author" text NOT NULL;
-ALTER TABLE wallaby.tag_detection ADD COLUMN "added_at" timestamp without time zone;
+ALTER TABLE wallaby.tag_detection ADD COLUMN "added_at" timestamp without time zone NOT NULL;
 ALTER TABLE wallaby.tag_detection ALTER COLUMN added_at SET DEFAULT now();
 ALTER TABLE wallaby.tag_detection ADD FOREIGN KEY ("tag_id") REFERENCES wallaby.tag ("id") ON UPDATE CASCADE ON DELETE CASCADE;
 ALTER TABLE wallaby.tag_detection ADD FOREIGN KEY ("detection_id") REFERENCES wallaby.detection ("id") ON UPDATE CASCADE ON DELETE CASCADE;
