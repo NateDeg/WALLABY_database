@@ -5,32 +5,27 @@ CREATE TABLE wallaby.observation (
   "id" BIGSERIAL PRIMARY KEY
 );
 ALTER TABLE wallaby.observation ADD COLUMN "sbid" BIGINT NOT NULL UNIQUE;
-ALTER TABLE wallaby.observation ADD COLUMN "ra" NUMERIC NOT NULL UNIQUE;
-ALTER TABLE wallaby.observation ADD COLUMN "dec" NUMERIC NOT NULL UNIQUE;
+ALTER TABLE wallaby.observation ADD COLUMN "ra" NUMERIC NOT NULL;
+ALTER TABLE wallaby.observation ADD COLUMN "dec" NUMERIC NOT NULL;
+ALTER TABLE wallaby.observation ADD COLUMN "description" VARCHAR NULL;
 ALTER TABLE wallaby.observation ADD COLUMN "image_cube_file" VARCHAR NULL UNIQUE;
 ALTER TABLE wallaby.observation ADD COLUMN "weights_cube_file" VARCHAR NULL UNIQUE;
 ALTER TABLE wallaby.observation ADD COLUMN "quality" VARCHAR DEFAULT NULL;
 ALTER TABLE wallaby.observation ADD COLUMN "status" VARCHAR DEFAULT NULL;
 
--- Identifiers (defined in advance)
-CREATE TABLE wallaby.tile_identifier (
-  "id" BIGSERIAL PRIMARY KEY
-);
-ALTER TABLE wallaby.tile_identifier ADD COLUMN "ra" NUMERIC NOT NULL UNIQUE;
-ALTER TABLE wallaby.tile_identifier ADD COLUMN "dec" NUMERIC NOT NULL UNIQUE;
-ALTER TABLE wallaby.tile_identifier ADD COLUMN "identifier" VARCHAR NOT NULL UNIQUE;
-
 -- Tiles (A/B mosaics of footprints)
 CREATE TABLE wallaby.tile (
   "id" BIGSERIAL PRIMARY KEY
 );
-ALTER TABLE wallaby.tile ADD COLUMN "identifier_id" BIGINT NOT NULL UNIQUE;
-ALTER TABLE wallaby.tile ADD COLUMN "footprint_A" BIGINT NOT NULL UNIQUE;
-ALTER TABLE wallaby.tile ADD COLUMN "footprint_B" BIGINT NOT NULL UNIQUE;
+ALTER TABLE wallaby.tile ADD COLUMN "ra" NUMERIC NOT NULL UNIQUE;
+ALTER TABLE wallaby.tile ADD COLUMN "dec" NUMERIC NOT NULL UNIQUE;
+ALTER TABLE wallaby.tile ADD COLUMN "identifier" VARCHAR NOT NULL UNIQUE;
+ALTER TABLE wallaby.tile ADD COLUMN "description" VARCHAR NULL;
+ALTER TABLE wallaby.tile ADD COLUMN "footprint_A" BIGINT NULL UNIQUE;
+ALTER TABLE wallaby.tile ADD COLUMN "footprint_B" BIGINT NULL UNIQUE;
 ALTER TABLE wallaby.tile ADD COLUMN "image_cube_file" VARCHAR NULL UNIQUE;
 ALTER TABLE wallaby.tile ADD COLUMN "weights_cube_file" VARCHAR NULL UNIQUE;
 ALTER TABLE wallaby.tile ADD COLUMN "status" VARCHAR DEFAULT NULL;
-ALTER TABLE wallaby.tile ADD FOREIGN KEY ("identifier_id") REFERENCES wallaby.tile_identifier ("id") ON DELETE CASCADE;
 ALTER TABLE wallaby.tile ADD FOREIGN KEY ("footprint_A") REFERENCES wallaby.observation ("id") ON DELETE CASCADE;
 ALTER TABLE wallaby.tile ADD FOREIGN KEY ("footprint_B") REFERENCES wallaby.observation ("id") ON DELETE CASCADE;
 
@@ -67,6 +62,6 @@ CREATE TABLE wallaby.prerequisite_identifier (
   "id" BIGSERIAL PRIMARY KEY
 );
 ALTER TABLE wallaby.prerequisite_identifier ADD COLUMN "prerequisite_id" BIGINT NOT NULL UNIQUE;
-ALTER TABLE wallaby.prerequisite_identifier ADD COLUMN "tile_identifier_id" BIGINT NOT NULL UNIQUE;
+ALTER TABLE wallaby.prerequisite_identifier ADD COLUMN "tile_id" BIGINT NOT NULL UNIQUE;
 ALTER TABLE wallaby.prerequisite_identifier ADD FOREIGN KEY ("prerequisite_id")  REFERENCES wallaby.prerequisite ("id") ON DELETE CASCADE;
-ALTER TABLE wallaby.prerequisite_identifier ADD FOREIGN KEY ("tile_identifier_id") REFERENCES wallaby.tile_identifier ("id") ON DELETE CASCADE;
+ALTER TABLE wallaby.prerequisite_identifier ADD FOREIGN KEY ("tile_id") REFERENCES wallaby.tile ("id") ON DELETE CASCADE;
