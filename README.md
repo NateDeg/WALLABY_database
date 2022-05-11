@@ -100,3 +100,41 @@ We have written some unit tests to ensure that the SQLAlchemy ORM works with the
 python -m unittest tests/tests_wallaby_run.py
 python -m unittest tests/tests_wallaby_instance.py
 ```
+
+## Operations
+
+The file [`src/06-operations.sql`](src/06-operations.sql) contains WALLABY tables used for managing the operations of the survey. Below are the tables and their descriptions:
+
+| Table | Description |
+| --- | --- |
+| `observation` |  tracking observations and their quality ([WALLABY footprint check](https://github.com/AusSRC/WALLABY_footprint_check)) in CASDA |
+| `tile` | pre-defined WALLABY tiles in the sky |
+| `postprocessing` | tracking any post-processing jobs ([WALLABY pipeline](https://github.com/AusSRC/WALLABY_pipeline)) run on the tiles | 
+| `mosaic` | many to many mapping from tiles to a postprocessing job |
+| `prerequisite` | TBA |
+| `prerequisite_identifier` | TBA |
+
+### Important fields
+
+#### quality
+
+The quality field refers to whether or not the footprint has passed the manual quality control step. This step involves running the [WALLABY footprint check](https://github.com/AusSRC/WALLABY_footprint_check) pipeline on the data once it becomes available through CASDA. These are the allows values for `quality`:
+
+| `quality` | Description |
+| --- | --- |
+| `NULL` | no quality check pipeline has been executed on this data |
+| `PENDING` | quality check pipeline has been triggered for this footprint and is awaiting input from WALLABY  |science team
+| `PASSED` | passed quality check and can be used for tiles |
+| `FAILED` | failed quality check and should not be used for creating tiles  |
+
+#### status
+
+The status field refers to the status of the pipeline executed on the data. This can either be the quality check pipeline that we discuss in the subsection above, or the [WALLABY post-processing pipeline](https://github.com/AusSRC/WALLABY_pipeline). The allowed values are in the table below.
+
+| `status` | Description |
+| --- | --- |
+| `NULL` | Pipeline has not been executed for this data |
+| `QUEUED` | Slurm job for the pipeline has been submitted and is waiting to run |
+| `RUNNING` | Pipeline is currently running |
+| `COMPLETED` | Pipeline has run to completion |
+| `FAILED` | Pipeline failed before running to completion |
