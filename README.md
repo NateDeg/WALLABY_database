@@ -1,7 +1,5 @@
 <h1 align="center">WALLABY Database</h1>
 
-[![Sync schema](https://github.com/AusSRC/WALLABY_database/actions/workflows/schema_sync.yml/badge.svg)](https://github.com/AusSRC/WALLABY_database/actions/workflows/schema_sync.yml)
-
 <!-- TODO(austin): build an official image for the WALLABY database -->
 
 ## src
