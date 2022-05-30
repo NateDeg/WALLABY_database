@@ -11,6 +11,7 @@ CREATE TABLE wallaby.run (
 );
 ALTER TABLE wallaby.run ADD COLUMN "name" varchar NOT NULL UNIQUE;
 ALTER TABLE wallaby.run ADD COLUMN "sanity_thresholds" jsonb NOT NULL;
+ALTER TABLE wallaby.run ADD CONSTRAINT run_name_sanity_threshold_key UNIQUE (name, sanity_thresholds);
 
 
 CREATE TABLE wallaby.instance (
@@ -29,7 +30,7 @@ ALTER TABLE wallaby.instance ADD COLUMN "return_code" integer;
 ALTER TABLE wallaby.instance ADD COLUMN "stdout" bytea;
 ALTER TABLE wallaby.instance ADD COLUMN "stderr" bytea;
 ALTER TABLE wallaby.instance ADD FOREIGN KEY ("run_id") REFERENCES wallaby.run ("id") ON DELETE CASCADE;
-ALTER TABLE wallaby.instance ADD CONSTRAINT instance_run_id_filename_boundary_key UNIQUE (run_id, filename, boundary)
+ALTER TABLE wallaby.instance ADD CONSTRAINT instance_run_id_filename_boundary_key UNIQUE (run_id, filename, boundary);
 
 
 CREATE TABLE wallaby.detection (
@@ -92,6 +93,7 @@ ALTER TABLE wallaby.detection ADD COLUMN "v_opt_peak" numeric NULL;
 ALTER TABLE wallaby.detection ADD COLUMN "v_app_peak" numeric NULL;
 ALTER TABLE wallaby.detection ADD FOREIGN KEY ("instance_id") REFERENCES wallaby.instance ("id") ON DELETE CASCADE;
 ALTER TABLE wallaby.detection ADD FOREIGN KEY ("run_id") REFERENCES wallaby.run ("id") ON DELETE CASCADE;
+ALTER TABLE wallaby.detection ADD CONSTRAINT detection_constraints UNIQUE (name, x, y, z, x_min, x_max, y_min, y_max, z_min, z_max, n_pix, f_min, f_max, f_sum, instance_id, run_id);
 
 
 CREATE TABLE wallaby.product (
