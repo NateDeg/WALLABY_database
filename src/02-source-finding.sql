@@ -29,6 +29,7 @@ ALTER TABLE wallaby.instance ADD COLUMN "return_code" integer;
 ALTER TABLE wallaby.instance ADD COLUMN "stdout" bytea;
 ALTER TABLE wallaby.instance ADD COLUMN "stderr" bytea;
 ALTER TABLE wallaby.instance ADD FOREIGN KEY ("run_id") REFERENCES wallaby.run ("id") ON DELETE CASCADE;
+ALTER TABLE wallaby.instance ADD CONSTRAINT instance_run_id_filename_boundary_key UNIQUE (run_id, filename, boundary)
 
 
 CREATE TABLE wallaby.detection (
