@@ -9,7 +9,7 @@ CREATE SCHEMA "wallaby" AUTHORIZATION "admin";
 CREATE TABLE wallaby.run (
   "id" BIGSERIAL PRIMARY KEY
 );
-ALTER TABLE wallaby.run ADD COLUMN "name" varchar NOT NULL UNIQUE;
+ALTER TABLE wallaby.run ADD COLUMN "name" varchar NOT NULL;
 ALTER TABLE wallaby.run ADD COLUMN "sanity_thresholds" jsonb NOT NULL;
 ALTER TABLE wallaby.run ADD CONSTRAINT run_name_sanity_threshold_key UNIQUE (name, sanity_thresholds);
 
@@ -18,7 +18,7 @@ CREATE TABLE wallaby.instance (
   "id" BIGSERIAL PRIMARY KEY
 );
 ALTER TABLE wallaby.instance ADD COLUMN "run_id" BIGINT NOT NULL;
-ALTER TABLE wallaby.instance ADD COLUMN "filename" varchar NOT NULL UNIQUE;
+ALTER TABLE wallaby.instance ADD COLUMN "filename" varchar NOT NULL;
 ALTER TABLE wallaby.instance ADD COLUMN "boundary" integer[] NOT NULL;
 ALTER TABLE wallaby.instance ADD COLUMN "run_date" timestamp without time zone NOT NULL;
 ALTER TABLE wallaby.instance ADD COLUMN "flag_log" bytea;
