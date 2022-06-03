@@ -34,8 +34,9 @@ ALTER TABLE wallaby.tile ADD FOREIGN KEY ("footprint_B") REFERENCES wallaby.obse
 CREATE TABLE wallaby.postprocessing (
   "id" BIGSERIAL PRIMARY KEY
 );
-ALTER TABLE wallaby.postprocessing ADD COLUMN "run_id" BIGINT NOT NULL UNIQUE;
-ALTER TABLE wallaby.postprocessing ADD COLUMN "run_name" VARCHAR NOT NULL UNIQUE;
+ALTER TABLE wallaby.postprocessing ADD COLUMN "run_id" BIGINT UNIQUE;
+ALTER TABLE wallaby.postprocessing ADD COLUMN "name" VARCHAR NOT NULL UNIQUE;
+ALTER TABLE wallaby.postprocessing ADD COLUMN "region" VARCHAR DEFAULT NULL;
 ALTER TABLE wallaby.postprocessing ADD COLUMN "sofia_parameter_file" VARCHAR DEFAULT NULL;
 ALTER TABLE wallaby.postprocessing ADD COLUMN "s2p_setup" VARCHAR DEFAULT NULL;
 ALTER TABLE wallaby.postprocessing ADD COLUMN "status" VARCHAR DEFAULT NULL;
