@@ -20,6 +20,8 @@ The first script [`01-users.sql`](src/01-users.sql) is used to create the databa
 * wallaby user (read-only access)
 * vo user
 
+You will need to create a file called `psql.env` which contains the environment variable `POSTGRES_PASSWORD`.
+
 ### Source finding
 
 The [`02-source-finding.sql`](src/02-source-finding.sql) and [`05-privileges.sql`](src/05-privileges.sql) scripts are used to create the tables required for source finding and access control. The tables are summarised below
