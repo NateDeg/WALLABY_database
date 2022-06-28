@@ -35,5 +35,5 @@ CREATE TABLE wallaby.kinematic_model (
   "SD_FO_model", varchar NOT NULL,
   "e_SD_FO_model_inc", varchar NOT NULL,
 );
-ALTER TABLE wallaby.kinematic_model ADD FOREIGN KEY ("Name") REFERENCES wallaby.detection ("name") ON DELETE CASCADE;
+ALTER TABLE wallaby.kinematic_model ADD FOREIGN KEY ("Name") REFERENCES wallaby.source ("name") ON DELETE CASCADE;
 
