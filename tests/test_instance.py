@@ -4,11 +4,10 @@
 
 import sys
 import json
-import time
 import django
 import pytest
 from dotenv import load_dotenv
-from tests.common import db_conn, run, instance
+from tests.common import db_conn, run, instance  # noqa
 
 
 Run = None
@@ -52,7 +51,7 @@ def test_update_instance(db_conn):
     update = json.dumps({'test': 'new_value'})
     row = Instance.objects.get(filename=instance['filename'])
     row.parameters = update
-    row.boundary = {1}  # TODO(austin): issues with boundary field interpretation...
+    row.boundary = {1}  # TODO(austin): issues with boundary field
     row.save()
 
     # assert content in database

@@ -4,11 +4,10 @@
 
 import sys
 import json
-import time
 import django
 import pytest
 from dotenv import load_dotenv
-from tests.common import db_conn, run
+from tests.common import db_conn, run  # noqa
 
 
 Run = None
@@ -54,7 +53,7 @@ def test_update_run(db_conn):
     db_conn.execute(query, (run['name'],))
     res = dict(db_conn.fetchone())
     assert(res['sanity_thresholds'] == update)
-    
+
 
 def test_delete_run(db_conn):
     Run.objects.filter(name=run['name']).delete()
