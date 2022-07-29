@@ -1,0 +1,27 @@
+name: Tests
+on: [push]
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    env:
+      DATABASE_NAME: wallabydb
+      DATABASE_USER: admin
+      DATABASE_HOST: ${{ secrets.DATABASE_HOST }}
+      DATABASE_PASS: ${{ secrets.DATABASE_PASS }}
+      DJANGO_SETTINGS_MODULE: orm.settings
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '3.8.0'
+          architecture: 'x64'
+      - name: Cache pip
+        uses: actions/cache@v2
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-build-${{ env.cache-name }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}
+      - run: pip3 install -r orm/requirements.txt
+      - run: pip3 install -r tests/requirements.txt
+      - run: pytest -vs
