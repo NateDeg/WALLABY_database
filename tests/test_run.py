@@ -3,12 +3,15 @@
 """
 
 import sys
+import json
 import django
+import random
 from dotenv import load_dotenv
 import pytest
 
 
 Run = None
+RUN_NAME = 'test_run'
 
 
 @pytest.fixture(scope="session", autouse=True)
@@ -24,11 +27,13 @@ def db_conn():
     return
 
 
-def test_get_run():
-    Run.objects.all()
-    assert True
+def test_create_run():
+    run = Run.objects.create(
+        name=RUN_NAME,
+        sanity_thresholds=json.dumps({'test': 'test'})
+    )
+    assert(run is not None)
 
 
-def test_get_runs():
-    Run.objects.all()
-    assert True
+def test_delete_run():
+    Run.objects.filter(name=RUN_NAME).delete()

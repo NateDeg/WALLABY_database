@@ -74,6 +74,13 @@ The easiest method for deploying the WALLABY database is with the docker. We hav
 docker-compose up --build
 ```
 
+You will need to define a `psql.env` file to set environment variables for the default `postgres` user in order to deploy the container. An example one is:
+
+```
+POSTGRES_USER=postgres
+POSTGRES_PASSWORD=password
+```
+
 ### Manual
 
 You can also install the schema on an existing PostgreSQL instance. You will also need to install dependencies `postgis` and `pg_sphere`. For Ubuntu and PostgreSQL 12, this can be done with the following command:
