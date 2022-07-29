@@ -16,7 +16,10 @@ run = {
 }
 
 instance = {
-
+    'filename': 'hydra',
+    'boundary': {0},
+    'run_date': '2021-11-16 05:22:03.544337',
+    'parameters': json.dumps({'test': 'test'})
 }
 
 
