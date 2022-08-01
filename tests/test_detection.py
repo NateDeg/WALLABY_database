@@ -3,7 +3,6 @@
 """
 
 import sys
-import json
 import django
 import pytest
 from dotenv import load_dotenv
@@ -32,17 +31,18 @@ def test_create_detection(db_conn):
     run_row = Run.objects.create(**run)
     assert(run_row is not None)
 
-    instance_row = Instance.objects.create(**{**{'run_id': run_row.id}, **instance})
+    instance_row = Instance.objects.create(
+        **{**{'run_id': run_row.id}, **instance}
+    )
     assert(instance_row is not None)
 
-    detection_row = Detection.objects.create(
-        **{**{
+    detection_row = Detection.objects.create(**{
+        **{
             'run_id': run_row.id,
             'instance_id': instance_row.id
-            },
-            **detection
-        }
-    )
+        },
+        **detection
+    })
     assert(detection_row is not None)
 
     # assert entry in database exists
@@ -72,4 +72,3 @@ def test_delete_detection(db_conn):
     db_conn.execute(instance_query, (instance['filename'],))
     res = db_conn.fetchone()
     assert(res is None)
-
