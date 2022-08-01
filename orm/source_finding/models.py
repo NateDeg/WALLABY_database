@@ -49,6 +49,8 @@ class Detection(models.Model):
     instance = models.ForeignKey(Instance, models.DO_NOTHING)
     run = models.ForeignKey(Run, models.DO_NOTHING)
     name = models.TextField(blank=True, null=True)
+    access_url = models.TextField(blank=False, null=False)
+    access_format = models.TextField(blank=False, null=False)
     x = PostgresDecimalField()
     y = PostgresDecimalField()
     z = PostgresDecimalField()
@@ -173,14 +175,13 @@ class Tag(models.Model):
         db_table = 'tag'
 
 
-class TagDetection(models.Model):
+class TagSourceDetection(models.Model):
     id = models.BigAutoField(primary_key=True)
     tag = models.ForeignKey(Tag, models.DO_NOTHING)
-    detection = models.ForeignKey(Detection, models.DO_NOTHING)
+    source_detection = models.ForeignKey(SourceDetection, models.DO_NOTHING)
     author = models.TextField()
     added_at = models.DateTimeField()
 
     class Meta:
         managed = False
-        db_table = 'tag_detection'
-        unique_together = (('tag', 'detection'),)
+        db_table = 'tag_source_detection'
