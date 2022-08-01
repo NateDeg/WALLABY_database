@@ -17,4 +17,5 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-build-${{ env.cache-name }}
       - run: pip3 install flake8
-      - run: flake8 .
+      - run: flake8 orm
+      - run: flake8 tests
