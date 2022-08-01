@@ -156,7 +156,6 @@ class Comment(models.Model):
     comment = models.TextField()
     author = models.CharField(max_length=128)
     detection = models.ForeignKey(Detection, models.DO_NOTHING)
-    added_at = models.DateTimeField()
     updated_at = models.DateTimeField(blank=True)
 
     class Meta:
