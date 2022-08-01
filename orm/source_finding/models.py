@@ -166,7 +166,7 @@ class Comment(models.Model):
 
 class Tag(models.Model):
     id = models.BigAutoField(primary_key=True)
-    tag_name = models.CharField(unique=True, max_length=50)
+    name = models.CharField(unique=True, max_length=50)
     description = models.TextField(null=True)
     added_at = models.DateTimeField()
 

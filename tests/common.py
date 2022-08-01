@@ -60,8 +60,15 @@ detection = {
     'unresolved': False
 }
 
+
 source = {
     'name': 'WALLABY J131553-183956',
+}
+
+
+tag = {
+    'name': 'Test Release',
+    'description': 'Release created for unittests'
 }
 
 
