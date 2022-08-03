@@ -31,7 +31,7 @@ def django_setup():
     """Setup database connection and Django shell
 
     """
-    load_dotenv()
+    load_dotenv(dotenv_path='./tests/.env.prod')
     sys.path.append('./orm/')
     django.setup()
     global Run, Instance, Detection, Source, SourceDetection
@@ -43,5 +43,6 @@ def django_setup():
     return
 
 
-def test_pass():
-    pass
+def test_retrieve_observation_metadata_for_source():
+    source_obj = Source.objects.get(name=SOURCE_NAME)
+    assert (source_obj is not None)
