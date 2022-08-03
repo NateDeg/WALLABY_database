@@ -18,11 +18,19 @@ class Observation(models.Model):
     quality = models.CharField(max_length=64, blank=True, null=True)
     status = models.CharField(max_length=64, blank=True, null=True)
 
+    class Meta:
+        managed = False
+        db_table = 'observation'
+
 
 class ObservationMetadata(models.Model):
     id = models.BigAutoField(primary_key=True)
     observation = models.ForeignKey(Observation, models.DO_NOTHING)
     parameters = models.JSONField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'observation_metadata'
 
 
 class Tile(models.Model):
@@ -32,10 +40,14 @@ class Tile(models.Model):
     identifier = models.CharField(max_length=64, blank=True, null=True)
     description = models.CharField(max_length=512, blank=True, null=True)
     phase = models.CharField(max_length=512, blank=True, null=True)
-    footprint_A = models.ForeignKey(Observation, models.DO_NOTHING)
-    footprint_B = models.ForeignKey(Observation, models.DO_NOTHING)
+    footprint_A = models.ForeignKey(Observation, blank=True, null=True, on_delete=models.DO_NOTHING)
+    footprint_B = models.ForeignKey(Observation, blank=True, null=True, on_delete=models.DO_NOTHING)
     image_cube_file = models.CharField(max_length=512, blank=True, null=True)
     weights_cube_file = models.CharField(max_length=512, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'tile'
 
 
 class Postprocessing(models.Model):
@@ -46,3 +58,7 @@ class Postprocessing(models.Model):
     sofia_parameter_file = models.CharField(max_length=512, blank=True, null=True)
     s2p_setup = models.CharField(max_length=512, blank=True, null=True)
     status = models.CharField(max_length=64, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'postprocessing'
