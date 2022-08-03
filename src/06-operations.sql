@@ -16,8 +16,8 @@ ALTER TABLE wallaby.observation ADD COLUMN "status" VARCHAR DEFAULT NULL;
 
 -- Observation metadata
 CREATE TABLE wallaby.observation_metadata ("id" BIGSERIAL PRIMARY KEY);
-ALTER TABLE wallaby.observation_metadata ADD COLUMN "slurm_output" jsonb NOT NULL;
 ALTER TABLE wallaby.observation_metadata ADD COLUMN "observation_id" BIGINT NOT NULL UNIQUE;
+ALTER TABLE wallaby.observation_metadata ADD COLUMN "slurm_output" jsonb NOT NULL;
 ALTER TABLE wallaby.observation_metadata ADD FOREIGN KEY ("observation_id") REFERENCES wallaby.observation ("id") ON DELETE CASCADE;
 
 -- Tiles (A/B mosaics of footprints)
