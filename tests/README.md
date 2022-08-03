@@ -13,3 +13,5 @@ DATABASE_NAME = "wallabydb"
 DATABASE_USER = <user>
 DATABASE_PASS = <password>
 ```
+
+TODO(austin): Write more tests to cover all other tables...

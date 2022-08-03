@@ -144,7 +144,7 @@ CREATE TABLE wallaby.tag (
 );
 ALTER TABLE wallaby.tag ADD COLUMN "name" varchar NOT NULL UNIQUE;
 ALTER TABLE wallaby.tag ADD COLUMN "description" text;
-ALTER TABLE wallaby.tag ADD COLUMN "added_at" timestamp without time zone NOT NULL;
+ALTER TABLE wallaby.tag ADD COLUMN "added_at" timestamp without time zone;
 ALTER TABLE wallaby.tag ALTER COLUMN added_at SET DEFAULT now();
 
 
