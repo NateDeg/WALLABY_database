@@ -9,6 +9,7 @@ def PostgresDecimalField(*args, **kwargs):
 
 class Observation(models.Model):
     id = models.BigAutoField(primary_key=True)
+    sbid = models.CharField(max_length=64, blank=True, null=True)
     ra = PostgresDecimalField()
     dec = PostgresDecimalField()
     description = models.CharField(max_length=512, blank=True, null=True)
@@ -26,7 +27,7 @@ class Observation(models.Model):
 class ObservationMetadata(models.Model):
     id = models.BigAutoField(primary_key=True)
     observation = models.ForeignKey(Observation, models.DO_NOTHING)
-    parameters = models.JSONField(blank=True, null=True)
+    slurm_output = models.JSONField(blank=True, null=True)
 
     class Meta:
         managed = False

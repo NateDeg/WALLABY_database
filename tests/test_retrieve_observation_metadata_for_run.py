@@ -54,10 +54,22 @@ def test_retrieve_observation_metadata_for_source():
 
     run_obj = Run.objects.get(id=detection_obj.run_id)
     assert (run_obj is not None)
-    print(run_obj.name)
 
     postprocessing_obj = Postprocessing.objects.get(run_id=run_obj.id)
     assert (postprocessing_obj is not None)
 
     tile_obj = Tile.objects.get(identifier=postprocessing_obj.name)
     assert (tile_obj is not None)
+
+    obs_A = Observation.objects.get(id=tile_obj.footprint_A.id)
+    assert (obs_A is not None)
+    obs_B = Observation.objects.get(id=tile_obj.footprint_B.id)
+    assert (obs_B is not None)
+
+    obs_meta_A = ObservationMetadata.objects.get(observation=obs_A)
+    assert (obs_meta_A is not None)
+    obs_meta_B = ObservationMetadata.objects.get(observation=obs_B)
+    assert (obs_meta_B is not None)
+
+    print(obs_meta_A.__dict__)
+    print(obs_meta_B.__dict__)
