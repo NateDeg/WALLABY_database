@@ -74,3 +74,7 @@ ALTER TABLE wallaby.prerequisite_identifier ADD COLUMN "prerequisite_id" BIGINT 
 ALTER TABLE wallaby.prerequisite_identifier ADD COLUMN "tile_id" BIGINT NOT NULL UNIQUE;
 ALTER TABLE wallaby.prerequisite_identifier ADD FOREIGN KEY ("prerequisite_id")  REFERENCES wallaby.prerequisite ("id") ON DELETE CASCADE;
 ALTER TABLE wallaby.prerequisite_identifier ADD FOREIGN KEY ("tile_id") REFERENCES wallaby.tile ("id") ON DELETE CASCADE;
+
+
+-- Grant permissions
+GRANT SELECT ON TABLE wallaby.observation, wallaby.observation_metadata, wallaby.tile, wallaby.postprocessing TO "wallaby_user";

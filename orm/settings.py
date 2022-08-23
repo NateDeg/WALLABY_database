@@ -6,6 +6,7 @@ import os
 INSTALLED_APPS = [
     "orm",
     "source_finding",
+    "operations",
     "kinematic_model",
 ]
 
