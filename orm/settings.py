@@ -5,7 +5,8 @@ import os
 
 INSTALLED_APPS = [
     "orm",
-    "source_finding"
+    "source_finding",
+    "kinematic_model",
 ]
 
 USE_TZ = False
