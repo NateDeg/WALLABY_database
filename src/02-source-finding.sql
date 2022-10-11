@@ -160,3 +160,14 @@ ALTER TABLE wallaby.tag_source_detection ADD COLUMN "added_at" timestamp without
 ALTER TABLE wallaby.tag_source_detection ALTER COLUMN added_at SET DEFAULT now();
 ALTER TABLE wallaby.tag_source_detection ADD FOREIGN KEY ("tag_id") REFERENCES wallaby.tag ("id") ON UPDATE CASCADE ON DELETE CASCADE;
 ALTER TABLE wallaby.tag_source_detection ADD FOREIGN KEY ("source_detection_id") REFERENCES wallaby.source_detection ("id") ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+-- External conflicts
+CREATE TABLE wallaby.external_conflict (
+    "id" BIGSERIAL PRIMARY KEY
+);
+ALTER TABLE wallaby.external_conflict ADD COLUMN "run_id" bigint NOT NULL;
+ALTER TABLE wallaby.external_conflict ADD COLUMN "detection_id" bigint NOT NULL;
+ALTER TABLE wallaby.external_conflict ADD COLUMN "conflict_source_detection_ids" integer[] NOT NULL;
+ALTER TABLE wallaby.external_conflict ADD FOREIGN KEY ("run_id") REFERENCES wallaby.run ("id") ON UPDATE CASCADE ON DELETE CASCADE;
+ALTER TABLE wallaby.external_conflict ADD FOREIGN KEY ("detection_id") REFERENCES wallaby.detection ("id") ON UPDATE CASCADE ON DELETE CASCADE;
