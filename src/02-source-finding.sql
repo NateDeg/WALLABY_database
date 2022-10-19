@@ -109,7 +109,7 @@ ALTER TABLE wallaby.product ADD COLUMN "snr" bytea NULL;
 ALTER TABLE wallaby.product ADD COLUMN "chan" bytea NULL;
 ALTER TABLE wallaby.product ADD COLUMN "spec" bytea;
 ALTER TABLE wallaby.product ADD COLUMN "summary" bytea NULL;
-ALTER TABLE wallaby.product ADD COLUMN "optical" bytea NULL;
+ALTER TABLE wallaby.product ADD COLUMN "plot" bytea NULL;
 ALTER TABLE wallaby.product ADD FOREIGN KEY ("detection_id") REFERENCES wallaby.detection ("id") ON DELETE CASCADE;
 
 
