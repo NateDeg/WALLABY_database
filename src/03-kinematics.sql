@@ -2,7 +2,7 @@
 
 -- Kinematic model catalogue
 CREATE TABLE wallaby.kinematic_model (
-  "id" BIGSERIAL PRIMARY KEY,
+  "id" BIGSERIAL PRIMARY KEY
 );
 ALTER TABLE wallaby.kinematic_model ADD COLUMN "name" varchar NOT NULL;
 ALTER TABLE wallaby.kinematic_model ADD COLUMN "ra" double precision NOT NULL;
