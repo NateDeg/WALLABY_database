@@ -1,5 +1,6 @@
 from django.db import models
 from django.db.models import DecimalField
+from django.contrib.postgres.fields import ArrayField
 
 
 def PostgresDecimalField(*args, **kwargs):
@@ -184,3 +185,12 @@ class TagSourceDetection(models.Model):
     class Meta:
         managed = False
         db_table = 'tag_source_detection'
+
+class ExternalConflict(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    detection = models.ForeignKey(Detection, on_delete=models.CASCADE)
+    conflict_source_detection_ids = ArrayField(models.IntegerField())
+
+    class Meta:
+        managed = False
+        db_table = 'external_conflict'
