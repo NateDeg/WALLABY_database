@@ -9,7 +9,7 @@ def PostgresDecimalField(*args, **kwargs):
 
 class KinematicModel(models.Model):
     id = models.BigAutoField(primary_key=True)
-    name = models.ForeignKey(Source, on_delete=models.DO_NOTHING)
+    name = models.ForeignKey(Source, to_field='name', on_delete=models.DO_NOTHING)
     ra = PostgresDecimalField()
     dec = PostgresDecimalField()
     freq = PostgresDecimalField()
