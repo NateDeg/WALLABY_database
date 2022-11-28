@@ -64,4 +64,4 @@ class WKAPPProduct(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'kinematic_model'
+        db_table = 'wkapp_product'
