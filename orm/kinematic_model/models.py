@@ -1,6 +1,5 @@
 from django.db import models
 from django.db.models import DecimalField
-
 from orm.source_finding.models import Source
 
 
@@ -9,39 +8,59 @@ def PostgresDecimalField(*args, **kwargs):
 
 
 class KinematicModel(models.Model):
-    id = models.BigAutoField(db_column='ID', primary_key=True)
-    name = models.ForeignKey(Source, db_column='Name', to_field='name', on_delete=models.DO_NOTHING)
-    ra = PostgresDecimalField(db_column='RA')
-    dec = PostgresDecimalField(db_column='DEC')
+    id = models.BigAutoField(primary_key=True)
+    name = models.ForeignKey(Source, on_delete=models.DO_NOTHING)
+    ra = PostgresDecimalField()
+    dec = PostgresDecimalField()
     freq = PostgresDecimalField()
     team_release = models.CharField(max_length=64)
     team_release_kin = models.CharField(max_length=64)
-    Vsys_model = PostgresDecimalField()
-    e_Vsys_model = PostgresDecimalField()
-    X_model = PostgresDecimalField()
-    e_X_model = PostgresDecimalField()
-    Y_model = PostgresDecimalField()
-    e_Y_model = PostgresDecimalField()
-    RA_model = PostgresDecimalField()
-    e_RA_model = PostgresDecimalField()
-    DEC_model = PostgresDecimalField()
-    e_DEC_model = PostgresDecimalField()
-    Inc_model = PostgresDecimalField()
-    e_Inc_model = PostgresDecimalField()
-    PA_model = PostgresDecimalField()
-    e_PA_model = PostgresDecimalField()
-    PA_model_g = PostgresDecimalField()
-    e_PA_model_g = PostgresDecimalField()
-    QFlag_model = models.IntegerField()
-    Rad = models.CharField(max_length=256)
-    Vrot_model = models.CharField(max_length=256)
-    e_Vrot_model = models.CharField(max_length=256)
-    e_Vrot_model_inc = models.CharField(max_length=256)
-    Rad_SD = models.CharField(max_length=256)
-    SD_model = models.CharField(max_length=256)
-    SD_FO_model = models.CharField(max_length=256)
-    e_SD_model = models.CharField(max_length=256)
-    e_SD_FO_model_inc = models.CharField(max_length=256)
+    vsys_model = PostgresDecimalField()
+    e_vsys_model = PostgresDecimalField()
+    x_model = PostgresDecimalField()
+    e_x_model = PostgresDecimalField()
+    y_model = PostgresDecimalField()
+    e_y_model = PostgresDecimalField()
+    ra_model = PostgresDecimalField()
+    e_ra_model = PostgresDecimalField()
+    dec_model = PostgresDecimalField()
+    e_dec_model = PostgresDecimalField()
+    inc_model = PostgresDecimalField()
+    e_inc_model = PostgresDecimalField()
+    pa_model = PostgresDecimalField()
+    e_pa_model = PostgresDecimalField()
+    pa_model_g = PostgresDecimalField()
+    e_pa_model_g = PostgresDecimalField()
+    qflag_model = models.IntegerField()
+    rad = models.CharField(max_length=256)
+    vrot_model = models.CharField(max_length=256)
+    e_vrot_model = models.CharField(max_length=256)
+    e_vrot_model_inc = models.CharField(max_length=256)
+    rad_sd = models.CharField(max_length=256)
+    sd_model = models.CharField(max_length=256)
+    sd_fo_model = models.CharField(max_length=256)
+    e_sd_model = models.CharField(max_length=256)
+    e_sd_fo_model_inc = models.CharField(max_length=256)
+
+    class Meta:
+        managed = False
+        db_table = 'kinematic_model'
+
+
+class WKAPPProduct(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    kinematic_model_id = models.ForeignKey(KinematicModel, models.DO_NOTHING)
+    baroloinput = models.BinaryField(blank=True, null=True)
+    barolomod = models.BinaryField(blank=True, null=True)
+    barolosurfdens = models.BinaryField(blank=True, null=True)
+    diagnosticplot = models.BinaryField(blank=True, null=True)
+    diffcube = models.BinaryField(blank=True, null=True)
+    fatinput = models.BinaryField(blank=True, null=True)
+    fatmod = models.BinaryField(blank=True, null=True)
+    fullresmodelcube = models.BinaryField(blank=True, null=True)
+    fullresproccube = models.BinaryField(blank=True, null=True)
+    modcube = models.BinaryField(blank=True, null=True)
+    procdata = models.BinaryField(blank=True, null=True)
 
     class Meta:
         managed = False
