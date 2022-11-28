@@ -11,6 +11,8 @@ services:
       - 5432:5432
     networks:
       - wallaby_network
+    volumes:
+      - /data:/var/lib/postgresql/data
 
 networks:
   wallaby_network:

@@ -91,6 +91,7 @@ ALTER TABLE wallaby.detection ADD COLUMN "b_peak" numeric NULL;
 ALTER TABLE wallaby.detection ADD COLUMN "v_rad_peak" numeric NULL;
 ALTER TABLE wallaby.detection ADD COLUMN "v_opt_peak" numeric NULL;
 ALTER TABLE wallaby.detection ADD COLUMN "v_app_peak" numeric NULL;
+ALTER TABLE wallaby.detection ADD COLUMN "sofia_id" bigint NULL;
 ALTER TABLE wallaby.detection ADD FOREIGN KEY ("instance_id") REFERENCES wallaby.instance ("id") ON DELETE CASCADE;
 ALTER TABLE wallaby.detection ADD FOREIGN KEY ("run_id") REFERENCES wallaby.run ("id") ON DELETE CASCADE;
 ALTER TABLE wallaby.detection ADD CONSTRAINT detection_constraints UNIQUE (name, x, y, z, x_min, x_max, y_min, y_max, z_min, z_max, n_pix, f_min, f_max, f_sum, instance_id, run_id);
@@ -109,7 +110,7 @@ ALTER TABLE wallaby.product ADD COLUMN "snr" bytea NULL;
 ALTER TABLE wallaby.product ADD COLUMN "chan" bytea NULL;
 ALTER TABLE wallaby.product ADD COLUMN "spec" bytea;
 ALTER TABLE wallaby.product ADD COLUMN "summary" bytea NULL;
-ALTER TABLE wallaby.product ADD COLUMN "optical" bytea NULL;
+ALTER TABLE wallaby.product ADD COLUMN "plot" bytea NULL;
 ALTER TABLE wallaby.product ADD FOREIGN KEY ("detection_id") REFERENCES wallaby.detection ("id") ON DELETE CASCADE;
 
 
