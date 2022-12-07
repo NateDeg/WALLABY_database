@@ -124,6 +124,7 @@ class Product(models.Model):
     chan = models.BinaryField(blank=True, null=True)
     snr = models.BinaryField(blank=True, null=True)
     spec = models.BinaryField(blank=True, null=True)
+    plot = models.BinaryField(blank=True, null=True)
 
     class Meta:
         managed = False
