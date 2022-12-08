@@ -57,7 +57,7 @@ class WKAPPProduct(models.Model):
     diffcube = models.BinaryField(blank=True, null=True)
     fatinput = models.BinaryField(blank=True, null=True)
     fatmod = models.BinaryField(blank=True, null=True)
-    fullresmodelcube = models.BinaryField(blank=True, null=True)
+    fullresmodcube = models.BinaryField(blank=True, null=True)
     fullresproccube = models.BinaryField(blank=True, null=True)
     modcube = models.BinaryField(blank=True, null=True)
     procdata = models.BinaryField(blank=True, null=True)
