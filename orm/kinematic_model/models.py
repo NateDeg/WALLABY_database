@@ -49,7 +49,7 @@ class KinematicModel(models.Model):
 
 class WKAPPProduct(models.Model):
     id = models.BigAutoField(primary_key=True)
-    kinematic_model_id = models.ForeignKey(KinematicModel, models.DO_NOTHING)
+    kinematic_model = models.ForeignKey(KinematicModel, models.DO_NOTHING)
     baroloinput = models.BinaryField(blank=True, null=True)
     barolomod = models.BinaryField(blank=True, null=True)
     barolosurfdens = models.BinaryField(blank=True, null=True)
