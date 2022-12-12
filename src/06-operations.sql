@@ -1,5 +1,10 @@
 \connect wallabydb
 
+-- Survey component
+CREATE TABLE wallaby.survey_component ("id" BIGSERIAL PRIMARY KEY);
+ALTER TABLE wallaby.survey_component ADD COLUMN "name" VARCHAR NOT NULL;
+ALTER TABLE wallaby.survey_component ADD COLUMN "runs" VARCHAR[] NULL;
+
 -- Footprint
 CREATE TABLE wallaby.observation (
   "id" BIGSERIAL PRIMARY KEY
@@ -56,25 +61,6 @@ ALTER TABLE wallaby.mosaic ADD COLUMN "tile_id" BIGINT NOT NULL UNIQUE;
 ALTER TABLE wallaby.mosaic ADD COLUMN "postprocessing_id" BIGINT NOT NULL UNIQUE;
 ALTER TABLE wallaby.mosaic ADD FOREIGN KEY ("tile_id") REFERENCES wallaby.tile ("id") ON DELETE CASCADE;
 ALTER TABLE wallaby.mosaic ADD FOREIGN KEY ("postprocessing_id") REFERENCES wallaby.postprocessing ("id") ON DELETE CASCADE;
-
--- Prerequisite triggers
-CREATE TABLE wallaby.prerequisite (
-  "id" BIGSERIAL PRIMARY KEY
-);
-ALTER TABLE wallaby.prerequisite ADD COLUMN "run_name" VARCHAR NOT NULL;
-ALTER TABLE wallaby.prerequisite ADD COLUMN "sofia_parameter_file" VARCHAR DEFAULT NULL;
-ALTER TABLE wallaby.prerequisite ADD COLUMN "s2p_setup" VARCHAR DEFAULT NULL;
-ALTER TABLE wallaby.prerequisite ADD COLUMN "status" VARCHAR DEFAULT NULL;
-
--- Map identifiers to prerequisite table
-CREATE TABLE wallaby.prerequisite_identifier (
-  "id" BIGSERIAL PRIMARY KEY
-);
-ALTER TABLE wallaby.prerequisite_identifier ADD COLUMN "prerequisite_id" BIGINT NOT NULL UNIQUE;
-ALTER TABLE wallaby.prerequisite_identifier ADD COLUMN "tile_id" BIGINT NOT NULL UNIQUE;
-ALTER TABLE wallaby.prerequisite_identifier ADD FOREIGN KEY ("prerequisite_id")  REFERENCES wallaby.prerequisite ("id") ON DELETE CASCADE;
-ALTER TABLE wallaby.prerequisite_identifier ADD FOREIGN KEY ("tile_id") REFERENCES wallaby.tile ("id") ON DELETE CASCADE;
-
 
 -- Grant permissions
 GRANT SELECT ON TABLE wallaby.observation, wallaby.observation_metadata, wallaby.tile, wallaby.postprocessing TO "wallaby_user";

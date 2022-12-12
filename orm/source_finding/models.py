@@ -187,6 +187,7 @@ class TagSourceDetection(models.Model):
         managed = False
         db_table = 'tag_source_detection'
 
+
 class ExternalConflict(models.Model):
     id = models.BigAutoField(primary_key=True)
     run = models.ForeignKey(Run, on_delete=models.CASCADE)
@@ -199,6 +200,7 @@ class ExternalConflict(models.Model):
         managed = False
         db_table = 'external_conflict'
 
+
 class SurveyComponent(models.Model):
     id = models.BigAutoField(primary_key=True)
     name = models.TextField()
@@ -209,4 +211,3 @@ class SurveyComponent(models.Model):
     class Meta:
         managed = False
         db_table = 'survey_component'
-
