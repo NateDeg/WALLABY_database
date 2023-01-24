@@ -1,9 +1,9 @@
 \connect wallabydb
 
--- Survey component
+-- Survey components
 CREATE TABLE wallaby.survey_component ("id" BIGSERIAL PRIMARY KEY);
-ALTER TABLE wallaby.survey_component ADD COLUMN "name" VARCHAR NOT NULL;
-ALTER TABLE wallaby.survey_component ADD COLUMN "runs" VARCHAR[] NULL;
+ALTER TABLE wallaby.survey_component ADD COLUMN "name" VARCHAR NOT NULL UNIQUE;
+ALTER TABLE wallaby.survey_component ADD COLUMN "runs" VARCHAR[];
 
 -- Footprint
 CREATE TABLE wallaby.observation (
@@ -31,6 +31,7 @@ CREATE TABLE wallaby.tile (
 );
 ALTER TABLE wallaby.tile ADD COLUMN "ra" NUMERIC NOT NULL;
 ALTER TABLE wallaby.tile ADD COLUMN "dec" NUMERIC NOT NULL;
+ALTER TABLE wallaby.tile ADD COLUMN "rotation" NUMERIC NOT NULL;
 ALTER TABLE wallaby.tile ADD COLUMN "identifier" VARCHAR NOT NULL UNIQUE;
 ALTER TABLE wallaby.tile ADD COLUMN "description" VARCHAR NULL;
 ALTER TABLE wallaby.tile ADD COLUMN "phase" VARCHAR NULL;
