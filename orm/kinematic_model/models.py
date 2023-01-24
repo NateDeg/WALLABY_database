@@ -9,7 +9,7 @@ def PostgresDecimalField(*args, **kwargs):
 
 class KinematicModel(models.Model):
     id = models.BigAutoField(primary_key=True)
-    source = models.ForeignKey(Source, to_field='name', on_delete=models.DO_NOTHING)
+    source = models.ForeignKey(Source, db_column='name', to_field='name', on_delete=models.DO_NOTHING)
     ra = PostgresDecimalField()
     dec = PostgresDecimalField()
     freq = PostgresDecimalField()
@@ -49,7 +49,7 @@ class KinematicModel(models.Model):
 
 class WKAPPProduct(models.Model):
     id = models.BigAutoField(primary_key=True)
-    kinematic_model_id = models.ForeignKey(KinematicModel, models.DO_NOTHING)
+    kinematic_model = models.ForeignKey(KinematicModel, models.DO_NOTHING)
     baroloinput = models.BinaryField(blank=True, null=True)
     barolomod = models.BinaryField(blank=True, null=True)
     barolosurfdens = models.BinaryField(blank=True, null=True)
@@ -57,7 +57,7 @@ class WKAPPProduct(models.Model):
     diffcube = models.BinaryField(blank=True, null=True)
     fatinput = models.BinaryField(blank=True, null=True)
     fatmod = models.BinaryField(blank=True, null=True)
-    fullresmodelcube = models.BinaryField(blank=True, null=True)
+    fullresmodcube = models.BinaryField(blank=True, null=True)
     fullresproccube = models.BinaryField(blank=True, null=True)
     modcube = models.BinaryField(blank=True, null=True)
     procdata = models.BinaryField(blank=True, null=True)

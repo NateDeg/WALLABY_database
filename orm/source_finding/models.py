@@ -124,6 +124,7 @@ class Product(models.Model):
     chan = models.BinaryField(blank=True, null=True)
     snr = models.BinaryField(blank=True, null=True)
     spec = models.BinaryField(blank=True, null=True)
+    plot = models.BinaryField(blank=True, null=True)
 
     class Meta:
         managed = False
@@ -186,11 +187,27 @@ class TagSourceDetection(models.Model):
         managed = False
         db_table = 'tag_source_detection'
 
+
 class ExternalConflict(models.Model):
     id = models.BigAutoField(primary_key=True)
+    run = models.ForeignKey(Run, on_delete=models.CASCADE)
     detection = models.ForeignKey(Detection, on_delete=models.CASCADE)
-    conflict_source_detection_ids = ArrayField(models.IntegerField())
+    conflict_source_detection_ids = ArrayField(
+        models.IntegerField()
+    )
 
     class Meta:
         managed = False
         db_table = 'external_conflict'
+
+
+class SurveyComponent(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    name = models.TextField()
+    runs = ArrayField(
+        models.TextField()
+    )
+
+    class Meta:
+        managed = False
+        db_table = 'survey_component'
