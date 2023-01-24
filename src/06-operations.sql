@@ -9,9 +9,11 @@ ALTER TABLE wallaby.survey_component ADD COLUMN "runs" VARCHAR[];
 CREATE TABLE wallaby.observation (
   "id" BIGSERIAL PRIMARY KEY
 );
-ALTER TABLE wallaby.observation ADD COLUMN "sbid" BIGINT NOT NULL UNIQUE;
+ALTER TABLE wallaby.observation ADD COLUMN "sbid" BIGINT NULL UNIQUE;
+ALTER TABLE wallaby.observation ADD COLUMN "name" VARCHAR NULL;
 ALTER TABLE wallaby.observation ADD COLUMN "ra" NUMERIC NOT NULL;
 ALTER TABLE wallaby.observation ADD COLUMN "dec" NUMERIC NOT NULL;
+ALTER TABLE wallaby.observation ADD COLUMN "rotation" NUMERIC NULL;
 ALTER TABLE wallaby.observation ADD COLUMN "description" VARCHAR NULL;
 ALTER TABLE wallaby.observation ADD COLUMN "phase" VARCHAR NULL;
 ALTER TABLE wallaby.observation ADD COLUMN "image_cube_file" VARCHAR NULL UNIQUE;
